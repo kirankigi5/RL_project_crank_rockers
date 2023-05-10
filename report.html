@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="problem">PROBLEM</h1>
+<p>The dynamics of the cart-pole system shown in Figure is given below. Here M and m<sub>p</sub> is the mass (kg) of the cart and pole respectively. The linear displacement (in m) of the cart is s denoted by x, g is the acceleration due to gravity, θ is the angular displacement (radians) of the pole of length L (in m) and F<sub>x</sub> is the input force applied to the cart (in N). Find the optimal control input (F<sub>x</sub>) that takes the pole from the initial angular position θ(0) = π/6 to the desired angular position θ(t<sub>f</sub>) = 0? (Here, the final time tf is a free variable.) M = 20 Kg, m<sub>p</sub> = 0.5 kg, L = 0.5 m;</br></p>
+<!-- include img -->
+<p><img src="imgs/cart-pole-img.jpg" width= 400px height= 400px></br></p>
+<h2 id="is-the-system-controllable">Is the system controllable?</h2>
+<blockquote>
+<p>Note: Assuming that θ is small we can linearize the non-linear problem to get A and B. </br></p>
+</blockquote>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \ddot{\theta}=\frac{-m_p L \sin \theta \cos \theta \dot{\theta}^2+\left(M+m_p\right) g \sin \theta+\cos \theta F_x}{\left(M+m_p\left(1-\cos ^2 \theta\right)\right) L} \\
+&amp; \ddot{x}=\frac{-m_p L \sin \theta \dot{\theta}^2+m_p g \sin \theta \cos \theta+F_x}{M+m_p\left(1-\cos ^2 \theta\right)}
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\begin{aligned} &amp; \Rightarrow \text { let, } \\ &amp; x=\left[\begin{array}{l}x_1 \\ x_2 \\ x_3 \\ x_4\end{array}\right] \\ &amp; x_1=x \\ &amp; x_2=\dot{x} \\ &amp; x_3=\theta \\ &amp; x_4=\dot{\theta} \\ &amp; u=F_x \\ &amp; \end{aligned}\)</span></p>
+<p><span class="math inline">\(\begin{aligned} &amp; \Rightarrow M l \ddot{\theta}=(M+m) g \theta-u \\ &amp; \Rightarrow M \ddot{x}=u-m g \theta \\ &amp; \Rightarrow \ddot{\theta}=\frac{(M+m) g \theta}{M l}-\frac{u}{M l} \\ &amp; \Rightarrow \ddot{x}=\frac{u}{M}-\frac{m g}{M} \theta\end{aligned}\)</span></p>
+<p><span class="math inline">\(\left[\begin{array}{c}\dot{x}_1 \\ \dot{x}_2 \\ \dot{x}_3 \\ \dot{x}_4\end{array}\right]=\left[\begin{array}{cccc}0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; \frac{-m g}{M} &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; \frac{(M+m)g}{M l} &amp; 0\end{array}\right]\left[\begin{array}{l}x_1 \\ x_2 \\ x_3 \\ x_4\end{array}\right]+\left[\begin{array}{c}0 \\ \frac{1}{M} \\ 0 \\ \frac{-1}{M l}\end{array}\right] u\)</span></p>
+<p><span class="math inline">\(\dot{x}=A x+B U\)</span></p>
+<blockquote>
+<p>Given, </br> M = 20 kg </br> g = 9.8 m / s<sup>2</sup> </br> m = 0.5 kg </br> l = 0.5 m </br></p>
+</blockquote>
+<blockquote>
+<p>Controllability matrix, CM = CM = [B AB A<sup>2</sup>B A<sup>3</sup>B] </br> By substituting M, g, m, l and calculating the rank of the controllability matrix we get, rank(CM) = 4 Which means the system is controllable</p>
+</blockquote>
+<h3 id="riccati-method">1. Riccati Method</h3>
+<p><em>If a system is controllable we can make the system stable</em></br></p>
+<p>By calculating the eigen values of A, we get some non-negative eigen values which means presently the system is unstable. We can make the system stable since the system is controllable.</p>
+<blockquote>
+<p>Here we solve for P and get K.</p>
+</blockquote>
+<p>Now following, </br> U = -KX </br> X<sub>dot</sub> = AX + BU </br></p>
+<p>starting from the initial state X<sub>0</sub> = [0 0 π/6 0] we get the following results.</p>
+<table>
+<thead>
+<tr class="header">
+<th>itr</th>
+<th>x</th>
+<th>xdot</th>
+<th>theta</th>
+<th>thetadot</th>
+<th>u</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.523599</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0.000000</td>
+<td>0.059975</td>
+<td>0.523599</td>
+<td>-0.017324</td>
+<td>122.515388</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>-0.000600</td>
+<td>0.119574</td>
+<td>0.523426</td>
+<td>-0.033898</td>
+<td>121.764630</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>-0.001795</td>
+<td>0.178798</td>
+<td>0.523087</td>
+<td>-0.049753</td>
+<td>121.011577</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>1995</td>
+<td>-10.630456</td>
+<td>0.018014</td>
+<td>0.000081</td>
+<td>-0.001051</td>
+<td>0.012374</td>
+</tr>
+<tr class="odd">
+<td>1996</td>
+<td>-10.630637</td>
+<td>0.018019</td>
+<td>0.000070</td>
+<td>-0.001045</td>
+<td>0.010227</td>
+</tr>
+<tr class="even">
+<td>1997</td>
+<td>-10.630817</td>
+<td>0.018022</td>
+<td>0.000060</td>
+<td>-0.001039</td>
+<td>0.008092</td>
+</tr>
+<tr class="odd">
+<td>1998</td>
+<td>-10.630997</td>
+<td>0.018025</td>
+<td>0.000049</td>
+<td>-0.001033</td>
+<td>0.005970</td>
+</tr>
+<tr class="even">
+<td>1999</td>
+<td>-10.631177</td>
+<td>0.018027</td>
+<td>0.000039</td>
+<td>-0.001027</td>
+<td>0.003861</td>
+</tr>
+</tbody>
+</table>
+<h2 id="simulation">simulation</h2>
+<ul>
+<li><img src="imgs/RL_img_1.png" width= 400px height= 400px></br></li>
+<li><img src="imgs/RL_img_2.png" width= 400px height= 400px></br></li>
+<li><img src="imgs/RL_img_3.png" width= 400px height= 400px></br></li>
+<li><img src="imgs/RL_img_4.png" width= 400px height= 400px></br></li>
+<li><img src="imgs/RL_img_5.png" width= 400px height= 400px></br></li>
+</ul>
+</body>
+</html>

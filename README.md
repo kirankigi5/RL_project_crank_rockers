@@ -3,7 +3,8 @@
 The dynamics of the cart-pole system shown in Figure  is given below. Here M and m<sub>p</sub> is the mass (kg) of the cart and pole respectively. The linear displacement (in m) of the cart is s denoted by x, g is the acceleration due to gravity, θ is the angular displacement (radians) of the pole of length L (in m) and F<sub>x</sub> is the input force applied to the cart (in N). Find the optimal control input (F<sub>x</sub>) that takes the pole from the initial angular position θ(0) = π/6 to the desired angular position θ(t<sub>f</sub>) = 0? (Here, the final time tf is a free variable.) M = 20 Kg, m<sub>p</sub> = 0.5 kg, L = 0.5 m;</br>
 
 <!-- include img -->
-<img src="imgs/cart-pole-img.jpg" width= 400px height= 400px>
+<img src="imgs/cart-pole-img.jpg" width= 400px height= 400px></br>
+
 
 ## Is the system controllable?
 > Note: Assuming that &theta; is small we can linearize the non-linear problem to get A and B. </br>
@@ -32,19 +33,51 @@ $\dot{x}=A x+B U$
 >l = 0.5 m </br>
 
 > Controllability matrix, CM = CM = [B AB A<sup>2</sup>B A<sup>3</sup>B] </br>
-
-
-
-
-
-
+> By substituting M, g, m, l and calculating the rank of the controllability matrix we get,
+> rank(CM) = 4
+> Which means the system is controllable
 
 
 ### 1. Riccati Method
+*If a system is controllable we can make the system stable*</br>
+
+By calculating the eigen values of A, we get some non-negative eigen values which means presently the system is unstable. We can make the system stable since the system is controllable. 
+
+> Here we solve for P and get K.
+
+Now following, </br>
+U = -KX </br>
+X<sub>dot</sub> = AX + BU </br>
+
+starting from the initial state X<sub>0</sub> = [0 0 &pi;/6 0] we get the following results.
 
 
 
-<!-- include giff -->
+| itr | x           | xdot        | theta      | thetadot    | u           |
+| --- | -----------| -----------| ----------| -----------| -----------|
+| 0   | 0.000000    | 0.000000   | 0.523599  | 0.000000   | 0.000000   |
+| 1   | 0.000000    | 0.059975   | 0.523599  | -0.017324 | 122.515388 |
+| 2   | -0.000600 | 0.119574   | 0.523426 | -0.033898 | 121.764630 |
+| 3   | -0.001795 | 0.178798  | 0.523087 | -0.049753 | 121.011577 |
+| ... | ...         | ...           | ...           | ...             | ... 
+|1995 |-10.630456 | 0.018014|  0.000081| -0.001051|    0.012374|
+|1996 |-10.630637  |0.018019  |0.000070 |-0.001045    |0.010227|
+|1997| -10.630817|  0.018022|  0.000060 |-0.001039  |  0.008092|
+|1998 |-10.630997  |0.018025  |0.000049 |-0.001033    |0.005970|
+|1999 |-10.631177|  0.018027|  0.000039 |-0.001027  |  0.003861          |
+
+
+## simulation
+ 
+* <img src="imgs/RL_img_1.png" width= 400px height= 400px></br>
+* <img src="imgs/RL_img_2.png" width= 400px height= 400px></br>
+* <img src="imgs/RL_img_3.png" width= 400px height= 400px></br>
+* <img src="imgs/RL_img_4.png" width= 400px height= 400px></br>
+* <img src="imgs/RL_img_5.png" width= 400px height= 400px></br> 
+
+
+
+
 
 
 

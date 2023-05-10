@@ -284,5 +284,27 @@
 <li><img src="imgs/RL_img_4.png" width= 400px height= 400px></br></li>
 <li><img src="imgs/RL_img_5.png" width= 400px height= 400px></br></li>
 </ul>
+<h3 id="dqn-algorithm">2. DQN-Algorithm</h3>
+<p>The main idea behind Q-learning is that if we had a function Q* :State×Action→R, that could tell us what our return would be, if we were to take an action in a given state, then we could easily construct a policy that maximizes our rewards: <span class="math display">\[
+\begin{aligned}
+\pi^{*}(s) = argmax_{a} Q^{*}(s,a)
+\end{aligned}
+\]</span></p>
+<p>However, we don’t know everything about the world, so we don’t have access to Q<em>. But, since neural networks are universal function approximators, we can simply create one and train it to resemble Q</em>.</p>
+<p>For our training update rule, we’ll use a fact that every Q function for some policy obeys the Bellman equation:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Q^{\pi}(s, a) = r + \gamma Q^{\pi}(s&#39;, \pi(s&#39;))
+\end{aligned}
+\]</span></p>
+<p>The difference between the two sides of the equality is known as the temporal difference error, δ:</p>
+<p><span class="math display">\[
+\begin{aligned}
+δ = Q(s, a) - (r + \gamma* max_{a}&#39;Q(s&#39;, a)
+\end{aligned})
+\]</span></p>
+<p>To minimize this error, we will use the Huber loss. The Huber loss acts like the mean squared error when the error is small, but like the mean absolute error when the error is large - this makes it more robust to outliers when the estimates of Q are very noisy.</p>
+<h4 id="dqn-plot">DQN plot</h4>
+<p><img src="imgs/DQN_plot.jpg" width= 400px height= 400px></br></p>
 </body>
 </html>

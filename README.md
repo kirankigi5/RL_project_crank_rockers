@@ -77,6 +77,43 @@ starting from the initial state X<sub>0</sub> = [0 0 &pi;/6 0] we get the follow
 
 
 
+### 2. DQN-Algorithm
+The main idea behind Q-learning is that if we had a function Q* :State×Action→R, that could tell us what our return would be, if we were to take an action in a given state, then we could easily construct a policy that maximizes our rewards:
+$$
+\begin{aligned}
+\pi^{*}(s) = argmax_{a} Q^{*}(s,a)
+\end{aligned}
+$$
+
+However, we don’t know everything about the world, so we don’t have access to Q*. But, since neural networks are universal function approximators, we can simply create one and train it to resemble Q*.
+
+
+For our training update rule, we’ll use a fact that every Q function for some policy obeys the Bellman equation:
+
+$$
+\begin{aligned}
+Q^{\pi}(s, a) = r + \gamma Q^{\pi}(s', \pi(s'))
+\end{aligned}
+$$
+
+The difference between the two sides of the equality is known as the temporal difference error, 
+δ:
+
+$$
+\begin{aligned}
+δ = Q(s, a) - (r + \gamma* max_{a}'Q(s', a)
+\end{aligned})
+$$
+
+To minimize this error, we will use the Huber loss. The Huber loss acts like the mean squared error when the error is small, but like the mean absolute error when the error is large - this makes it more robust to outliers when the estimates of Q are very noisy.
+
+#### DQN plot
+
+<img src="imgs/DQN_plot.jpg" width= 400px height= 400px></br>
+
+
+
+
 
 
 

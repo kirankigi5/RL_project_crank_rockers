@@ -5,6 +5,17 @@ The dynamics of the cart-pole system shown in Figure  is given below. Here M and
 <!-- include img -->
 <img src="imgs/cart-pole-img.jpg" width= 400px height= 400px>
 
+## Solutions 
+
+### 1. Riccati Method
+
+
+
+<!-- include giff -->
+
+
+
+
 
 
 

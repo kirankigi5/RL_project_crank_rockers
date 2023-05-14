@@ -181,6 +181,7 @@
 <p>Here we solve for P and get K.</p>
 </blockquote>
 <p>Now following, </br> U = -KX </br> X<sub>dot</sub> = AX + BU </br></p>
+<p><img src="imgs/riccati.png"></br></p>
 <p>starting from the initial state X<sub>0</sub> = [0 0 π/6 0] we get the following results.</p>
 <table>
 <thead>
@@ -284,7 +285,30 @@
 <li><img src="imgs/RL_img_4.png" width= 400px height= 400px></br></li>
 <li><img src="imgs/RL_img_5.png" width= 400px height= 400px></br></li>
 </ul>
-<h3 id="dqn-algorithm">2. DQN-Algorithm</h3>
+<h3 id="reinforce-algorithm">2. REINFORCE ALGORITHM</h3>
+<p>Reinforce algorithm is a policy gradient method for reinforcement learning, where the goal is to learn a policy that maximizes the expected cumulative reward over time. It is an on-policy algorithm, which means that it updates the policy while interacting with the environment.</p>
+<p>Here are the steps of the REINFORCE algorithm:</p>
+<p>Initialize the policy parameters <span class="math inline">\(\theta\)</span> randomly by neural network which generates probabilities of an action. Repeat for each episode: Generate a trajectory by following the current policy <span class="math inline">\(\pi_\theta\)</span>. For each timestep <span class="math inline">\(t\)</span> in the trajectory: Compute the discounted return <span class="math inline">\(G_t=\sum_{k=t}^T\gamma^{k-t}r_k\)</span>, where <span class="math inline">\(T\)</span> is the time horizon of the episode and <span class="math inline">\(\gamma\)</span> is the discount factor. Compute the log-probability of the action taken at timestep <span class="math inline">\(t\)</span> under the policy <span class="math inline">\(\pi_\theta\)</span>: <span class="math inline">\(\log \pi_\theta(a_t|s_t)\)</span>. Compute the policy gradient at timestep <span class="math inline">\(t\)</span>: <span class="math inline">\(\nabla_\theta \log \pi_\theta(a_t|s_t) G_t\)</span>. Update the policy parameters using the mean of the policy gradients over the trajectory: <!-- insert img --> * <img src="imgs/REINFORCE.jpg"></br></p>
+<p>where <span class="math inline">\(\alpha\)</span> is the learning rate and <span class="math inline">\(N\)</span> is the length of the trajectory. The intuition behind the REINFORCE algorithm is that it encourages the policy to increase the probability of actions that lead to higher returns and decrease the probability of actions that lead to lower returns. By following the gradient of the expected return with respect to the policy parameters, the algorithm can update the policy parameters to improve the policy.</p>
+<blockquote>
+<p>Reward used is below: * <img src="imgs/REINFORCE_REWARD.jpg"></br></p>
+</blockquote>
+<blockquote>
+<p>PLOTS 1. Theta vs Time * <img src="imgs/REINFORCE_img_1.jpg"></br> * 2. Position vs time * <img src="imgs/REINFORCE_img_2.jpg"></br></p>
+</blockquote>
+<h3 id="policy-iteration">3. Policy Iteration</h3>
+<ul>
+<li><img src="imgs/policy_iteration.png"></br></li>
+<li><ul>
+<li><img src="imgs/policy_result.jpg"></br></li>
+</ul></li>
+</ul>
+<h3 id="vaue-iteration">4. Vaue Iteration</h3>
+<ul>
+<li><img src="imgs/value_iteration.png"></br></li>
+<li><img src="imgs/value_result.jpg"></br></li>
+</ul>
+<h3 id="dqn-algorithm">5. DQN-Algorithm</h3>
 <p>The main idea behind Q-learning is that if we had a function Q* :State×Action→R, that could tell us what our return would be, if we were to take an action in a given state, then we could easily construct a policy that maximizes our rewards: <span class="math display">\[
 \begin{aligned}
 \pi^{*}(s) = argmax_{a} Q^{*}(s,a)
@@ -305,6 +329,6 @@ Q^{\pi}(s, a) = r + \gamma Q^{\pi}(s&#39;, \pi(s&#39;))
 \]</span></p>
 <p>To minimize this error, we will use the Huber loss. The Huber loss acts like the mean squared error when the error is small, but like the mean absolute error when the error is large - this makes it more robust to outliers when the estimates of Q are very noisy.</p>
 <h4 id="dqn-plot">DQN plot</h4>
-<p><img src="imgs/DQN_plot.jpg" width= 400px height= 400px></br></p>
+<p><img src="imgs/DQN_plot.jpg" width= 400px height= 400px></br> <img src="imgs/DQN_result.jpg" width= 400px height= 400px></br></p>
 </body>
 </html>

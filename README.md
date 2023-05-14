@@ -43,11 +43,15 @@ $\dot{x}=A x+B U$
 
 By calculating the eigen values of A, we get some non-negative eigen values which means presently the system is unstable. We can make the system stable since the system is controllable. 
 
+
+
 > Here we solve for P and get K.
 
 Now following, </br>
 U = -KX </br>
 X<sub>dot</sub> = AX + BU </br>
+
+<img src="imgs/riccati.png"></br>
 
 starting from the initial state X<sub>0</sub> = [0 0 &pi;/6 0] we get the following results.
 
@@ -77,7 +81,49 @@ starting from the initial state X<sub>0</sub> = [0 0 &pi;/6 0] we get the follow
 
 
 
-### 2. DQN-Algorithm
+
+
+### 2. REINFORCE ALGORITHM
+Reinforce algorithm is a policy gradient method for reinforcement learning, where the goal is to learn a policy that maximizes the expected cumulative reward over time. It is an on-policy algorithm, which means that it updates the policy while interacting with the environment.
+
+Here are the steps of the REINFORCE algorithm:
+
+Initialize the policy parameters $\theta$ randomly by neural network which generates probabilities of an action.
+Repeat for each episode:
+Generate a trajectory by following the current policy $\pi_\theta$.
+For each timestep $t$ in the trajectory:
+Compute the discounted return $G_t=\sum_{k=t}^T\gamma^{k-t}r_k$, where $T$ is the time horizon of the episode and $\gamma$ is the discount factor.
+Compute the log-probability of the action taken at timestep $t$ under the policy $\pi_\theta$: $\log \pi_\theta(a_t|s_t)$.
+Compute the policy gradient at timestep $t$: $\nabla_\theta \log \pi_\theta(a_t|s_t) G_t$.
+Update the policy parameters using the mean of the policy gradients over the trajectory:
+<!-- insert img -->
+* <img src="imgs/REINFORCE.jpg"></br>
+
+
+ 
+where $\alpha$ is the learning rate and $N$ is the length of the trajectory.
+The intuition behind the REINFORCE algorithm is that it encourages the policy to increase the probability of actions that lead to higher returns and decrease the probability of actions that lead to lower returns. By following the gradient of the expected return with respect to the policy parameters, the algorithm can update the policy parameters to improve the policy.
+
+> Reward used is below:
+* <img src="imgs/REINFORCE_REWARD.jpg"></br>
+
+> PLOTS
+> 1. Theta vs Time
+* <img src="imgs/REINFORCE_img_1.jpg"></br>
+* 2. Position vs time
+* <img src="imgs/REINFORCE_img_2.jpg"></br>
+
+### 3. Policy Iteration
+* <img src="imgs/policy_iteration.png"></br>
+* * <img src="imgs/policy_result.jpg"></br>
+
+
+### 4. Vaue Iteration
+* <img src="imgs/value_iteration.png"></br>
+* <img src="imgs/value_result.jpg"></br>
+
+
+### 5. DQN-Algorithm
 The main idea behind Q-learning is that if we had a function Q* :State×Action→R, that could tell us what our return would be, if we were to take an action in a given state, then we could easily construct a policy that maximizes our rewards:
 $$
 \begin{aligned}
@@ -107,9 +153,32 @@ $$
 
 To minimize this error, we will use the Huber loss. The Huber loss acts like the mean squared error when the error is small, but like the mean absolute error when the error is large - this makes it more robust to outliers when the estimates of Q are very noisy.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #### DQN plot
 
 <img src="imgs/DQN_plot.jpg" width= 400px height= 400px></br>
+<img src="imgs/DQN_result.jpg" width= 400px height= 400px></br>
+
+
 
 
 

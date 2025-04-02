@@ -7,42 +7,39 @@ The dynamics of the cart-pole system shown in Figure  is given below. Here M and
 
 
 ## Is the system controllable?
-> Note: Assuming that &theta; is small we can linearize the non-linear problem to get A and B. </br>
+**Note:** Assuming that \( \theta \) is small, we can linearize the non-linear problem to get \( A \) and \( B \).
 
-\[
-\begin{aligned}
-\ddot{\theta} &= \frac{-m_p L \sin\theta \cos\theta \dot{\theta}^2 + (M + m_p) g \sin\theta + \cos\theta F_x}{(M + m_p (1 - \cos^2\theta)) L} \\
+$$
+\begin{aligned} 
+\ddot{\theta} &= \frac{-m_p L \sin\theta \cos\theta \dot{\theta}^2 + (M + m_p) g \sin\theta + \cos\theta F_x}{(M + m_p (1 - \cos^2\theta)) L} \\ 
 \ddot{x} &= \frac{-m_p L \sin\theta \dot{\theta}^2 + m_p g \sin\theta \cos\theta + F_x}{M + m_p (1 - \cos^2\theta)}
 \end{aligned}
-\]
+$$
 
-
-\[
+### State Variables
+$$
 \begin{aligned} 
-& \Rightarrow \text { let, } \\ 
-& x=\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} \\ 
-& x_1=x \\ 
-& x_2=\dot{x} \\ 
-& x_3=\theta \\ 
-& x_4=\dot{\theta} \\ 
-& u=F_x \\ 
+& \Rightarrow \text{ Let, } \\
+& x = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}, \quad 
+x_1 = x, \quad x_2 = \dot{x}, \quad x_3 = \theta, \quad x_4 = \dot{\theta}, \quad u = F_x
 \end{aligned}
-\]
+$$
 
-\[
+### Linearized Equations
+$$
 \begin{aligned} 
-& \Rightarrow M l \ddot{\theta}=(M+m) g \theta - u \\ 
-& \Rightarrow M \ddot{x}=u - m g \theta \\ 
-& \Rightarrow \ddot{\theta}=\frac{(M+m) g \theta}{M l} - \frac{u}{M l} \\ 
-& \Rightarrow \ddot{x}=\frac{u}{M} - \frac{m g}{M} \theta
+M l \ddot{\theta} &= (M+m) g \theta - u \\ 
+M \ddot{x} &= u - m g \theta \\ 
+\ddot{\theta} &= \frac{(M+m) g \theta}{M l} - \frac{u}{M l} \\ 
+\ddot{x} &= \frac{u}{M} - \frac{m g}{M} \theta
 \end{aligned}
-\]
+$$
 
-\[
+### State-Space Representation
+$$
 \begin{bmatrix} 
 \dot{x}_1 \\ \dot{x}_2 \\ \dot{x}_3 \\ \dot{x}_4
-\end{bmatrix}
-=
+\end{bmatrix} =
 \begin{bmatrix} 
 0 & 1 & 0 & 0 \\ 
 0 & 0 & \frac{-m g}{M} & 0 \\ 
@@ -56,7 +53,8 @@ x_1 \\ x_2 \\ x_3 \\ x_4
 \begin{bmatrix} 
 0 \\ \frac{1}{M} \\ 0 \\ \frac{-1}{M l}
 \end{bmatrix} u
-\]
+$$
+
 
  
 $\dot{x}=A x+B U$
